@@ -4,9 +4,9 @@ var Lockman = cc.Sprite.extend({
 		this.initWithFile('res/images/lockman.png');
 		this.x = x;
 		this.y = y;
+		bulletList = [];
 	},
 	moveUP: function(){
-		console.log(this.x+" "+this.y);
 		switch(this.y){
 			case Lockman.POS.TOP:
 				this.y = Lockman.POS.BOT;
@@ -18,7 +18,23 @@ var Lockman = cc.Sprite.extend({
 				this.y = Lockman.POS.MID;
 			break;
 		}
-		this.setPosition(cc.p(this.x,this.y))
+		this.setPositionY(this.y);
+		console.log(this.x+" "+this.y);
+	},
+	moveDOWN: function(){
+		switch(this.y){
+			case Lockman.POS.TOP:
+				this.y = Lockman.POS.MID;
+			break;
+			case Lockman.POS.MID:
+				this.y = Lockman.POS.BOT;
+			break;
+			case Lockman.POS.BOT:
+				this.y = Lockman.POS.TOP;
+			break;
+		}
+		this.setPositionY(this.y);
+		console.log(this.y);
 	}
 });
 Lockman.POS = {

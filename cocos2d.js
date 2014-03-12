@@ -15,7 +15,8 @@
             'src/GameLayer.js',     //add your own files in order here
             'src/resource.js',
             'src/Lockman.js',
-            'src/Monster.js'
+            'src/Monster.js',
+            'src/Bullet.js'
         ]
     };
 
