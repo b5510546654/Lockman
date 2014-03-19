@@ -10,6 +10,7 @@ var Bullet = cc.Sprite.extend({
 	update: function(dt){
 		if(this.x > 900){
 			this.gameLayer.removeChild(this);
+			this.gameLayer.deleteBullet(this);
 		}else{
 			this.x = this.x + this.speed;
 			this.setPosition(this.x,this.y);
