@@ -12,8 +12,12 @@ var Bullet = cc.Sprite.extend({
 		this.gameLayer = gameLayer;
 	},
 	ctor: function(x,y,gameLayer,atr){
+		console.log("FD");
 		this._super();
-		this.atr = atr;
+		if(atr == undefined)
+			this.atr = this.randomAtr();
+		else
+			this.atr = atr;
 		if(this.atr == Bullet.Atr.RED)
 			this.initWithFile('res/images/bullet.png');
 		else

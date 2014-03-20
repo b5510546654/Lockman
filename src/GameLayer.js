@@ -46,12 +46,12 @@ var GameLayer = cc.LayerColor.extend({
         this.bullet.scheduleUpdate();
     },
     deleteBullet: function(bullet){
-        var shout = "";
-        for(var a = 0;a<this.bulletList.length;a++){
-            var pos = this.bulletList[a].getPosition();
-            shout += pos.x+" "+pos.y+"   ";
-        }
-        console.log(shout);
+        // var shout = "";
+        // for(var a = 0;a<this.bulletList.length;a++){
+        //     var pos = this.bulletList[a].getPosition();
+        //     shout += pos.x+" "+pos.y+"   ";
+        // }
+        // console.log(shout);
         var i = this.bulletList.indexOf(bullet);
         console.log(i+" index");
         if (i >= 0) this.bulletList.splice(i, 1);
