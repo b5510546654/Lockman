@@ -19,7 +19,6 @@ var Lockman = cc.Sprite.extend({
 			break;
 		}
 		this.setPositionY(this.y);
-		console.log(this.x+" "+this.y);
 	},
 	moveDOWN: function(){
 		switch(this.y){
