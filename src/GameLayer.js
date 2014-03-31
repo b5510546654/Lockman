@@ -11,6 +11,8 @@ var GameLayer = cc.LayerColor.extend({
         this.lockman.setPosition(cc.p(screenWidth/10, Lockman.POS.MID ));
         this.addChild(this.lockman);
 
+        this.schedule(this.createMonster,2);
+
         this.scheduleUpdate();
         return true;
     },
@@ -57,11 +59,24 @@ var GameLayer = cc.LayerColor.extend({
         if (i >= 0) this.bulletList.splice(i, 1);
     },
     createMonster: function(){
-        this.monster = new Monster(1.2 * screenWidth,screenHeight / 3 ,this.bulletList,this.lockman,this);
-        this.monster.setPosition(cc.p(1.2 * screenWidth,screenHeight / 3 ));
+        console.log("CREATE");
+        var height = this.randomPosition();
+        this.monster = new Monster(1.2 * screenWidth,height,this.bulletList,this.lockman,this);
+        this.monster.setPosition(cc.p(1.2 * screenWidth,height));
         this.monsterList.push(this.monster);
         this.addChild(this.monster);
         this.monster.scheduleUpdate();
+    },
+    randomPosition: function(){
+        var random = Math.floor(Math.random()*3);
+        switch(random){
+            case 0 : return screenHeight / 3 ;
+            break;
+            case 1 : return screenHeight / 3 + screenHeight/4;
+            break;
+            case 2 : return screenHeight / 3 + 2*screenHeight/4;
+            break;
+        }
     },
     deleteMonster: function(monster){
         var i = this.monsterList.indexOf(monster);
