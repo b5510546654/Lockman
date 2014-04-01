@@ -13,7 +13,6 @@ var Monster = cc.Sprite.extend({
 		this.lockman = lockman;
 		this.gameLayer = gameLayer;
 		this.bulletList = bulletList;
-		console.log(this.atr);
 	},
 	update: function(dt){
 		this.bulletCollide();
@@ -51,7 +50,6 @@ var Monster = cc.Sprite.extend({
 		var lpos = this.lockman.getPosition();
 		if(Math.abs(lpos.x-this.x) <= 50 && Math.abs(lpos.y-this.y) < 30){
 			//gameover
-			console.log("DIE");
 		}
 	},
 	randomAtr : function(){

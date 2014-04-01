@@ -16,7 +16,9 @@
             'src/resource.js',
             'src/Lockman.js',
             'src/Monster.js',
-            'src/Bullet.js'
+            'src/Bullet.js',
+            'src/RedButton.js',
+            'src/BlueButton.js'
         ]
     };
 

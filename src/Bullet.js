@@ -1,18 +1,5 @@
 var Bullet = cc.Sprite.extend({
-	ctor: function(x,y,gameLayer){
-		this._super();
-		this.atr = this.randomAtr();
-		if(this.atr == Bullet.Atr.RED)
-			this.initWithFile('res/images/bullet.png');
-		else
-			this.initWithFile('res/images/bullet2.png')
-		this.speed = 20;
-		this.x = x;
-		this.y = y;	
-		this.gameLayer = gameLayer;
-	},
 	ctor: function(x,y,gameLayer,atr){
-		console.log("FD");
 		this._super();
 		if(atr == undefined)
 			this.atr = this.randomAtr();
@@ -37,8 +24,9 @@ var Bullet = cc.Sprite.extend({
 		}
 	},
 	randomAtr : function(){
-		var random = Math.ceil(Math.random()*2);
-		return random;
+		var date = new Date();
+		var halfsec = Math.floor(date.getTime()/500);
+		return halfsec%2 + 1;
 	}
 });
 Bullet.Atr = {
