@@ -26,11 +26,15 @@ var GameLayer = cc.LayerColor.extend({
         this.addChild(this.lockman);
 
         this.schedule(this.createMonster,2);
-
+        
         this.scheduleUpdate();
+
+        window.number = 2;
+        setInterval(this.intervalNumber,500);
         return true;
     },
     onKeyDown: function(e){
+        console.log(window.number);
         switch(e){
             case cc.KEY.up:
                 this.lockman.moveUP();
@@ -39,7 +43,7 @@ var GameLayer = cc.LayerColor.extend({
                 this.lockman.moveDOWN();
             break;
             case cc.KEY.space:
-               this.createBulletX(this.redButton.getNumber());
+               this.createBulletX(window.number);
             break;
             case cc.KEY.z:
                this.createBulletX(1);
@@ -94,6 +98,14 @@ var GameLayer = cc.LayerColor.extend({
         this.addChild(this.bullet);
         this.bullet.scheduleUpdate();
     },
+    intervalNumber: function(){
+        if(window.number == 1){
+            window.number = 2;
+        }
+        else{
+            window.number = 1;
+        }
+    }
 });
 
 var StartScene = cc.Scene.extend({
