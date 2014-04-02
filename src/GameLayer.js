@@ -5,24 +5,24 @@ var GameLayer = cc.LayerColor.extend({
 
         this._super();
         this.background = cc.Sprite.create ('res/images/background.png');
-        this.background.setAnchorPoint( new cc.Point( 0 , 0 ) );
-        this.addChild( this.background, 0 );
+        this.background.setAnchorPoint(new cc.Point(0,0));
+        this.addChild(this.background,0);
 
         this.setKeyboardEnabled(true);
-        this._super( new cc.Color4B( 127, 127, 127, 255 ) );
-        this.setPosition( new cc.Point( 0, 0 ) );
+        this._super(new cc.Color4B(127,127,127,255));
+        this.setPosition(new cc.Point(0,0));
         
-        this.redButton = new RedButton(screenWidth/4,screenHeight/6);
-        this.redButton.setPosition(cc.p(screenWidth/4,screenHeight/6));
+        this.redButton = new RedButton(screenWidth / 4,screenHeight / 6);
+        this.redButton.setPosition(cc.p(screenWidth / 4,screenHeight / 6));
         this.addChild(this.redButton);
 
-        this.blueButton = new BlueButton(screenWidth/4+120,screenHeight/6);
-        this.blueButton.setPosition(cc.p(screenWidth/4+120,screenHeight/6));
+        this.blueButton = new BlueButton(screenWidth / 4 + 120,screenHeight / 6);
+        this.blueButton.setPosition(cc.p(screenWidth / 4 + 120,screenHeight / 6));
         this.addChild(this.blueButton);
 
 
-        this.lockman = new Lockman(screenWidth/10, Lockman.POS.MID);
-        this.lockman.setPosition(cc.p(screenWidth/10, Lockman.POS.MID ));
+        this.lockman = new Lockman(screenWidth / 10, Lockman.POS.MID);
+        this.lockman.setPosition(cc.p(screenWidth / 10, Lockman.POS.MID));
         this.addChild(this.lockman);
 
         this.schedule(this.createMonster,2);
@@ -64,7 +64,7 @@ var GameLayer = cc.LayerColor.extend({
         // }
         // console.log(shout);
         var i = this.bulletList.indexOf(bullet);
-        if (i >= 0) this.bulletList.splice(i, 1);
+        if (i >= 0) this.bulletList.splice(i,1);
     },
     createMonster: function(){
         var height = this.randomPosition();
@@ -79,9 +79,9 @@ var GameLayer = cc.LayerColor.extend({
         switch(random){
             case 0 : return screenHeight / 3 ;
             break;
-            case 1 : return screenHeight / 3 + screenHeight/4;
+            case 1 : return screenHeight / 3 + screenHeight / 4;
             break;
-            case 2 : return screenHeight / 3 + 2*screenHeight/4;
+            case 2 : return screenHeight / 3 + 2 * screenHeight / 4;
             break;
         }
     },
@@ -113,7 +113,7 @@ var StartScene = cc.Scene.extend({
         this._super();
         var layer = new GameLayer();
         layer.init();
-        this.addChild( layer );
+        this.addChild(layer);
     }
 });
 
