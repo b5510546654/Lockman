@@ -7,9 +7,6 @@ var Lockman = cc.Sprite.extend({
 	},
 	moveUP: function(){
 		switch(this.y){
-			case Lockman.POS.TOP:
-				this.y = Lockman.POS.BOT;
-			break;
 			case Lockman.POS.MID:
 				this.y = Lockman.POS.TOP;
 			break;
@@ -26,9 +23,6 @@ var Lockman = cc.Sprite.extend({
 			break;
 			case Lockman.POS.MID:
 				this.y = Lockman.POS.BOT;
-			break;
-			case Lockman.POS.BOT:
-				this.y = Lockman.POS.TOP;
 			break;
 		}
 		this.setPositionY(this.y);

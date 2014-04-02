@@ -45,7 +45,7 @@ var GameLayer = cc.LayerColor.extend({
             case cc.KEY.space:
                this.createBulletX(window.number);
             break;
-            case cc.KEY.z:
+            /*case cc.KEY.z:
                this.createBulletX(1);
             break;
             case cc.KEY.x:
@@ -53,7 +53,7 @@ var GameLayer = cc.LayerColor.extend({
             break;
             case cc.KEY.w:
                 this.createMonster();
-            break;
+            break;*/
         }
     },
     deleteBullet: function(bullet){
