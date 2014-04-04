@@ -14,12 +14,13 @@ var Monster = cc.Sprite.extend({
 		this.gameLayer = gameLayer;
 		this.bulletList = bulletList;
 	},
+
 	update: function(dt){
 		this.bulletCollide();
 		this.lockmanCollide();
 		var posx = this.getPositionX();
 		if(posx < -50){
-			//GAME OVER
+			this.gameLayer.gameOver();
 			this.gameLayer.removeChild(this);
 			this.gameLayer.deleteMonster(this);
 		}
@@ -28,17 +29,20 @@ var Monster = cc.Sprite.extend({
 			this.setPositionX(this.x);
 		}
 	},
+
 	bulletCollide: function(){
 		for(var i = 0 ; i < this.bulletList.length ; i++){
 			var bullet = this.bulletList[i];
 			var bpos = bullet.getPosition();
 			if(Math.abs(bpos.x - this.x) <= 50 && Math.abs(bpos.y - this.y) < 30){
 				if(bullet.atr == this.atr){
+					this.gameLayer.score ++;
+					this.gameLayer.updateScoreLabel();
 					this.gameLayer.removeChild(this);
 					this.gameLayer.deleteMonster(this);
 				}
 				else{
-					this.speed += 0.5;
+					this.speed += 1;
 				}
 				this.gameLayer.removeChild(bullet);
 				this.gameLayer.deleteBullet(bullet);
@@ -46,12 +50,14 @@ var Monster = cc.Sprite.extend({
 			}
 		}
 	},
+
 	lockmanCollide: function(){
 		var lpos = this.lockman.getPosition();
 		if(Math.abs(lpos.x - this.x) <= 50 && Math.abs(lpos.y - this.y) < 30){
-			//gameover
+			this.gameLayer.gameOver();
 		}
 	},
+	
 	randomAtr : function(){
 		var random = Math.ceil(Math.random() * 2);
 		return random;

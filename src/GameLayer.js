@@ -25,14 +25,21 @@ var GameLayer = cc.LayerColor.extend({
         this.lockman.setPosition(cc.p(screenWidth / 10, Lockman.POS.MID));
         this.addChild(this.lockman);
 
-        this.schedule(this.createMonster,2);
+        this.schedule(this.createMonster,1);
         
         this.scheduleUpdate();
 
+        this.score = 0;
+        this.scoreLabel = cc.LabelTTF.create( '0', 'Arial', 32 );
+        this.scoreLabel.setPosition( cc.p( 15 * 40, 14 * 40 + 15 ) );
+        this.addChild( this.scoreLabel );
+
         window.number = 2;
+
         setInterval(this.intervalNumber,500);
         return true;
     },
+
     onKeyDown: function(e){
         console.log(window.number);
         switch(e){
@@ -42,8 +49,10 @@ var GameLayer = cc.LayerColor.extend({
             case cc.KEY.down:
                 this.lockman.moveDOWN();
             break;
-            case cc.KEY.space:
-               this.createBulletX(window.number);
+            case cc.KEY.space:{
+                if(this.bulletList.length < 5)
+                   this.createBulletX(window.number);
+               }
             break;
             /*case cc.KEY.z:
                this.createBulletX(1);
@@ -56,6 +65,7 @@ var GameLayer = cc.LayerColor.extend({
             break;*/
         }
     },
+
     deleteBullet: function(bullet){
         // var shout = "";
         // for(var a = 0;a<this.bulletList.length;a++){
@@ -74,6 +84,7 @@ var GameLayer = cc.LayerColor.extend({
         this.addChild(this.monster);
         this.monster.scheduleUpdate();
     },
+
     randomPosition: function(){
         var random = Math.floor(Math.random()*3);
         switch(random){
@@ -85,10 +96,12 @@ var GameLayer = cc.LayerColor.extend({
             break;
         }
     },
+
     deleteMonster: function(monster){
         var i = this.monsterList.indexOf(monster);
         if(i >= 0) this.bulletList.splice(i,1);
     },
+
     createBulletX: function(atr){
         var posX = this.lockman.x + 50;
         var posY = this.lockman.y;
@@ -98,6 +111,7 @@ var GameLayer = cc.LayerColor.extend({
         this.addChild(this.bullet);
         this.bullet.scheduleUpdate();
     },
+    
     intervalNumber: function(){
         if(window.number == 1){
             window.number = 2;
@@ -105,6 +119,23 @@ var GameLayer = cc.LayerColor.extend({
         else{
             window.number = 1;
         }
+    },
+
+    gameOver: function(){
+/*        for(var i = 0;i < monsterList.length;i++){
+            monsterList[i].unscheduleUpdate();
+        }
+        for(var i = 0;i < bulletList.length;i++){
+            bulletList[i].unscheduleUpdate();
+        }
+        this.redButton.unscheduleUpdate();
+        this.blueButton.unscheduleUpdate();
+        this.lockman.unscheduleUpdate();
+        */
+    },
+
+    updateScoreLabel: function(){        
+        this.scoreLabel.setString(this.score);
     }
 });
 
