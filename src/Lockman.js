@@ -17,6 +17,10 @@ var Lockman = cc.Sprite.extend({
 		return cc.RepeatForever.create( cc.Animate.create( animation ) );
     },
 
+    stop: function(){
+    	this.stopAction(this.movingAction);
+    },
+    
     moveUP: function(){
 		switch(this.y){
 			case Lockman.POS.MID:

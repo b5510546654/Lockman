@@ -128,9 +128,11 @@ var GameLayer = cc.LayerColor.extend({
         for(var i = 0;i < this.bulletList.length;i++){
             this.bulletList[i].unscheduleUpdate();
         }
-        this.redButton.unscheduleUpdate();
-        this.blueButton.unscheduleUpdate();
-        this.lockman.unscheduleUpdate();        
+        this.unschedule(this.createMonster);
+        this.lockman.stop();
+        this.redButton.stop();
+        this.blueButton.stop();
+        this.setKeyboardEnabled(false);
     },
 
     updateScoreLabel: function(){        
