@@ -122,7 +122,7 @@ var GameLayer = cc.LayerColor.extend({
     },
 
     gameOver: function(){
-/*        for(var i = 0;i < monsterList.length;i++){
+        for(var i = 0;i < monsterList.length;i++){
             monsterList[i].unscheduleUpdate();
         }
         for(var i = 0;i < bulletList.length;i++){
@@ -130,8 +130,7 @@ var GameLayer = cc.LayerColor.extend({
         }
         this.redButton.unscheduleUpdate();
         this.blueButton.unscheduleUpdate();
-        this.lockman.unscheduleUpdate();
-        */
+        this.lockman.unscheduleUpdate();        
     },
 
     updateScoreLabel: function(){        
