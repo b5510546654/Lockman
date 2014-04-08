@@ -122,11 +122,11 @@ var GameLayer = cc.LayerColor.extend({
     },
 
     gameOver: function(){
-        for(var i = 0;i < monsterList.length;i++){
-            monsterList[i].unscheduleUpdate();
+        for(var i = 0;i < this.monsterList.length;i++){
+            this.monsterList[i].unscheduleUpdate();
         }
-        for(var i = 0;i < bulletList.length;i++){
-            bulletList[i].unscheduleUpdate();
+        for(var i = 0;i < this.bulletList.length;i++){
+            this.bulletList[i].unscheduleUpdate();
         }
         this.redButton.unscheduleUpdate();
         this.blueButton.unscheduleUpdate();
