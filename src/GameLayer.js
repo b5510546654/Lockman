@@ -51,28 +51,13 @@ var GameLayer = cc.LayerColor.extend({
             break;
             case cc.KEY.space:{
                 if(this.bulletList.length < 5)
-                   this.createBulletX(window.number);
+                   this.createBullet(window.number);
                }
             break;
-            /*case cc.KEY.z:
-               this.createBulletX(1);
-            break;
-            case cc.KEY.x:
-               this.createBulletX(2);
-            break;
-            case cc.KEY.w:
-                this.createMonster();
-            break;*/
         }
     },
 
     deleteBullet: function(bullet){
-        // var shout = "";
-        // for(var a = 0;a<this.bulletList.length;a++){
-        //     var pos = this.bulletList[a].getPosition();
-        //     shout += pos.x+" "+pos.y+"   ";
-        // }
-        // console.log(shout);
         var i = this.bulletList.indexOf(bullet);
         if (i >= 0) this.bulletList.splice(i,1);
     },
@@ -102,7 +87,7 @@ var GameLayer = cc.LayerColor.extend({
         if(i >= 0) this.bulletList.splice(i,1);
     },
 
-    createBulletX: function(atr){
+    createBullet: function(atr){
         var posX = this.lockman.x + 50;
         var posY = this.lockman.y;
         this.bullet = new Bullet(posX,posY,this,atr);
