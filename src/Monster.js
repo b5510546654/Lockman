@@ -7,9 +7,11 @@ var Monster = cc.Sprite.extend({
 			this.initWithFile('res/images/monster.png');
 		else
 			this.initWithFile('res/images/monster2.png');
+
 		this.speed = 3;
 		this.x = x;
 		this.y = y;
+
 		this.lockman = lockman;
 		this.gameLayer = gameLayer;
 		this.bulletList = bulletList;
@@ -18,11 +20,11 @@ var Monster = cc.Sprite.extend({
 	update: function(dt){
 		this.bulletCollide();
 		this.lockmanCollide();
+
 		var posx = this.getPositionX();
 		if(posx < -50){
 			this.gameLayer.gameOver();
-			this.gameLayer.removeChild(this);
-			this.gameLayer.deleteMonster(this);
+			this.deleteObject(this);
 		}
 		else{
 			this.x = this.getPositionX() - this.speed
@@ -34,26 +36,34 @@ var Monster = cc.Sprite.extend({
 		for(var i = 0 ; i < this.bulletList.length ; i++){
 			var bullet = this.bulletList[i];
 			var bpos = bullet.getPosition();
-			if(Math.abs(bpos.x - this.x) <= 50 && Math.abs(bpos.y - this.y) < 30){
+			if(this.isHit(bpos)){
 				if(bullet.atr == this.atr){
 					this.gameLayer.score ++;
 					this.gameLayer.updateScoreLabel();
-					this.gameLayer.removeChild(this);
-					this.gameLayer.deleteMonster(this);
+					this.deleteObject(this);
 				}
 				else{
 					this.speed += 1;
 				}
-				this.gameLayer.removeChild(bullet);
-				this.gameLayer.deleteBullet(bullet);
+				this.deleteObject(bullet);
 				break;
 			}
 		}
 	},
 
+	isHit:function(pos){
+		return (Math.abs(pos.x - this.x) <= 50 && Math.abs(pos.y - this.y) < 30);
+	},
+
+
+	deleteObject: function(object){
+		this.gameLayer.removeChild(object);
+		this.gameLayer.deleteMonster(object);
+	},
+
 	lockmanCollide: function(){
 		var lpos = this.lockman.getPosition();
-		if(Math.abs(lpos.x - this.x) <= 50 && Math.abs(lpos.y - this.y) < 30){
+		if(this.isHit(lpos)){
 			this.gameLayer.gameOver();
 		}
 	},
