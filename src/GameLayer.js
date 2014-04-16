@@ -20,12 +20,18 @@ var GameLayer = cc.LayerColor.extend({
         
         this.scheduleUpdate();
 
+        window.timeLabel = cc.LabelTTF.create( '0', 'Arial', 32 );
+        window.timeLabel.setPosition( cc.p(15* 40, 14 * 40 - 15) );
+        this.addChild( window.timeLabel);
+
         this.score = 0;
         this.scoreLabel = cc.LabelTTF.create( '0', 'Arial', 32 );
         this.scoreLabel.setPosition( cc.p( 15 * 40, 14 * 40 + 15 ) );
         this.addChild( this.scoreLabel );
 
-        window.number = 2;
+        window.number = 0;
+
+        window.monsterSpeed = 3;
 
         setInterval(this.intervalNumber,500);
         return true;
@@ -45,10 +51,9 @@ var GameLayer = cc.LayerColor.extend({
         this.lockman = new Lockman(screenWidth / 10, Lockman.POS.MID);
         this.lockman.setPosition(cc.p(screenWidth / 10, Lockman.POS.MID));
         this.addChild(this.lockman);
-    }
+    },
 
     onKeyDown: function(e){
-        console.log(window.number);
         switch(e){
             case cc.KEY.up:
                 this.lockman.moveUP();
@@ -58,19 +63,26 @@ var GameLayer = cc.LayerColor.extend({
             break;
             case cc.KEY.space:{
                 if(this.bulletList.length < 5)
-                   this.createBullet(window.number);
+                   this.createBullet(this.selectElement());
                }
             break;
         }
     },
 
-    deleteBullet: function(bullet){
+    selectElement: function(){
+        if(Math.floor(window.number*2) % 2 == 1)
+            return 1;
+        else
+            return 2;
+    },
+
+    removeBullet: function(bullet){
         var i = this.bulletList.indexOf(bullet);
         if (i >= 0) this.bulletList.splice(i,1);
     },
     createMonster: function(){
         var height = this.randomPosition();
-        this.monster = new Monster(1.2 * screenWidth,height,this.bulletList,this.lockman,this);
+        this.monster = new Monster(1.2 * screenWidth,height,window.monsterSpeed,this.bulletList,this.lockman,this);
         this.monster.setPosition(cc.p(1.2 * screenWidth,height));
         this.monsterList.push(this.monster);
         this.addChild(this.monster);
@@ -89,7 +101,7 @@ var GameLayer = cc.LayerColor.extend({
         }
     },
 
-    deleteMonster: function(monster){
+    removeMonster: function(monster){
         var i = this.monsterList.indexOf(monster);
         if(i >= 0) this.bulletList.splice(i,1);
     },
@@ -105,11 +117,11 @@ var GameLayer = cc.LayerColor.extend({
     },
     
     intervalNumber: function(){
-        if(window.number == 1){
-            window.number = 2;
-        }
-        else{
-            window.number = 1;
+        window.number += 0.5;
+        if(Math.floor(window.number*2) % 2 == 0)
+             window.timeLabel.setString(window.number);
+        if(Math.floor(window.number*2)%10 == 0){
+            window.monsterSpeed += 1;
         }
     },
 
@@ -124,6 +136,7 @@ var GameLayer = cc.LayerColor.extend({
         this.lockman.stop();
         this.redButton.stop();
         this.blueButton.stop();
+        this.unscheduleUpdate();
         this.setKeyboardEnabled(false);
     },
 

@@ -1,6 +1,6 @@
 
 var Monster = cc.Sprite.extend({
-	ctor: function(x,y,bulletList,lockman,gameLayer){
+	ctor: function(x,y,speed,bulletList,lockman,gameLayer){
 		this._super();
 		this.atr = this.randomAtr();
 		if(this.atr == Monster.Atr.RED)
@@ -8,7 +8,7 @@ var Monster = cc.Sprite.extend({
 		else
 			this.initWithFile('res/images/monster2.png');
 
-		this.speed = 3;
+		this.speed = speed;
 		this.x = x;
 		this.y = y;
 
@@ -24,7 +24,7 @@ var Monster = cc.Sprite.extend({
 		var posx = this.getPositionX();
 		if(posx < -50){
 			this.gameLayer.gameOver();
-			this.deleteObject(this);
+			this.deleteMonster(this);
 		}
 		else{
 			this.x = this.getPositionX() - this.speed
@@ -40,12 +40,12 @@ var Monster = cc.Sprite.extend({
 				if(bullet.atr == this.atr){
 					this.gameLayer.score ++;
 					this.gameLayer.updateScoreLabel();
-					this.deleteObject(this);
+					this.deleteMonster(this);
 				}
 				else{
-					this.speed += 1;
+					this.speed *= 1.75;
 				}
-				this.deleteObject(bullet);
+				this.deleteBullet(bullet);
 				break;
 			}
 		}
@@ -56,9 +56,14 @@ var Monster = cc.Sprite.extend({
 	},
 
 
-	deleteObject: function(object){
-		this.gameLayer.removeChild(object);
-		this.gameLayer.deleteMonster(object);
+	deleteMonster: function(monster){
+		this.gameLayer.removeChild(monster);
+		this.gameLayer.removeMonster(monster);
+	},
+
+	deleteBullet: function(bullet){
+		this.gameLayer.removeChild(bullet);
+		this.gameLayer.removeBullet(bullet);
 	},
 
 	lockmanCollide: function(){
