@@ -33,6 +33,8 @@ var GameLayer = cc.LayerColor.extend({
 
         window.monsterSpeed = 3;
 
+        this.IsGameOver = false;
+
         setInterval(this.intervalNumber,500);
         return true;
     },
@@ -54,19 +56,22 @@ var GameLayer = cc.LayerColor.extend({
     },
 
     onKeyDown: function(e){
-        switch(e){
-            case cc.KEY.up:
-                this.lockman.moveUP();
-            break;
-            case cc.KEY.down:
-                this.lockman.moveDOWN();
-            break;
-            case cc.KEY.space:{
-                if(this.bulletList.length < 5)
-                   this.createBullet(this.selectElement());
-               }
-            break;
-        }
+        if(this.IsGameOver)
+            this.newGame();
+        else
+            switch(e){
+                case cc.KEY.up:
+                    this.lockman.moveUP();
+                break;
+                case cc.KEY.down:
+                    this.lockman.moveDOWN();
+                break;
+                case cc.KEY.space:{
+                    if(this.bulletList.length < 5)
+                       this.createBullet(this.selectElement());
+                   }
+                break;
+            }
     },
 
     selectElement: function(){
@@ -137,11 +142,47 @@ var GameLayer = cc.LayerColor.extend({
         this.redButton.stop();
         this.blueButton.stop();
         this.unscheduleUpdate();
-        this.setKeyboardEnabled(false);
+        this.IsGameOver = true;
     },
 
     updateScoreLabel: function(){        
         this.scoreLabel.setString(this.score);
+    },
+
+    clear: function(){ 
+        for(var i = 0; i < this.bulletList.length;i++){
+            var bullet = this.bulletList[i];
+            this.removeChild(bullet);
+            console.log(remove+" "+i);
+        }
+
+        for(var i = 0; i < this.monsterList.length;i++){
+            var monster = this.monsterList[i];
+            this.removeChild(monster);
+        }
+        
+        this.bulletList = [];
+
+        this.monsterList = [];
+
+        this.removeChild(this.lockman);
+
+        this.removeChild(this.redButton);
+
+        this.removeChild(this.blueButton);
+
+        window.number = 0;
+        window.monsterSpeed = 3;
+        this.score = 0;
+    },
+
+    newGame: function(){
+        this.clear();
+        this.updateScoreLabel();
+        this.createButton();
+        this.createLockman();
+        this.schedule(this.createMonster,1);
+        this.scheduleUpdate();
     }
 });
 
