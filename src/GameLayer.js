@@ -18,8 +18,6 @@ var GameLayer = cc.LayerColor.extend({
 
         this.schedule(this.createMonster,1);
         
-        this.schedule(this.createItem,1);
-
         this.scheduleUpdate();
 
         window.timeLabel = cc.LabelTTF.create( '0', 'Arial', 32 );
@@ -98,9 +96,9 @@ var GameLayer = cc.LayerColor.extend({
 
     createItem: function(){
         var height = this.randomPosition();
-        this.item = new Item(window.monsterSpeed);
+        this.item = new Item(1.2 * screenWidth,height,window.monsterSpeed);
         this.item.setPosition(cc.p(1.2 * screenWidth,height));
-        this.addChild(this.monster);
+        this.addChild(this.item);
         this.item.scheduleUpdate();
     },
 
@@ -194,6 +192,12 @@ var GameLayer = cc.LayerColor.extend({
         this.createLockman();
         this.schedule(this.createMonster,1);
         this.scheduleUpdate();
+    },
+
+    update: function(dt){
+        if(this.bulletList.length == 3 && this.monsterList == 2 && this.score % 5 == 0){
+            this.createItem();
+        }
     }
 });
 
