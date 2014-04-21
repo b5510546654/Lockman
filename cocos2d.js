@@ -18,7 +18,8 @@
             'src/Monster.js',
             'src/Bullet.js',
             'src/RedButton.js',
-            'src/BlueButton.js'
+            'src/BlueButton.js',
+            'src/Item.js'
         ]
     };
 

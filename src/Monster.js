@@ -27,7 +27,7 @@ var Monster = cc.Sprite.extend({
 			this.deleteMonster(this);
 		}
 		else{
-			this.x = this.getPositionX() - this.speed
+			this.x = this.getPositionX() - this.speed;
 			this.setPositionX(this.x);
 		}
 	},
