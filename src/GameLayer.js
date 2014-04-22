@@ -99,6 +99,7 @@ var GameLayer = cc.LayerColor.extend({
 
     createItem: function(){
         var height = this.randomPosition();
+        if(this.item) return 0;
         this.item = new Item(1.2 * screenWidth,height,window.monsterSpeed,this.bulletList,this.lockman,this);
         this.item.setPosition(cc.p(1.2 * screenWidth,height));
         this.addChild(this.item);
@@ -173,6 +174,8 @@ var GameLayer = cc.LayerColor.extend({
         this.bulletList = [];
 
         this.monsterList = [];
+
+        this.item = null;
 
     },
 
