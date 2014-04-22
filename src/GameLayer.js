@@ -96,6 +96,7 @@ var GameLayer = cc.LayerColor.extend({
 
     createItem: function(){
         var height = this.randomPosition();
+        if(this.item) return 0;
         this.item = new Item(1.2 * screenWidth,height,window.monsterSpeed);
         this.item.setPosition(cc.p(1.2 * screenWidth,height));
         this.addChild(this.item);
@@ -131,8 +132,6 @@ var GameLayer = cc.LayerColor.extend({
     
     intervalNumber: function(){
         window.number += 0.5;
-        if(Math.floor(window.number*2) % 2 == 0)
-             window.timeLabel.setString(window.number);
         if(Math.floor(window.number*2)%10 == 0){
             window.monsterSpeed += 1;
         }
@@ -183,6 +182,7 @@ var GameLayer = cc.LayerColor.extend({
         window.monsterSpeed = 3;
         this.score = 0;
         this.IsGameOver = false;
+        this.scoreLabel.setString('0');
     },
 
     newGame: function(){
@@ -195,6 +195,8 @@ var GameLayer = cc.LayerColor.extend({
     },
 
     update: function(dt){
+        if(Math.floor(window.number*2) % 2 == 0)
+             window.timeLabel.setString(window.number);
         if(this.bulletList.length == 3 && this.monsterList == 2 && this.score % 5 == 0){
             this.createItem();
         }
