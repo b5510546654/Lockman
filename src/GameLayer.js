@@ -88,6 +88,7 @@ var GameLayer = cc.LayerColor.extend({
         var i = this.bulletList.indexOf(bullet);
         if (i >= 0) this.bulletList.splice(i,1);
     },
+
     createMonster: function(){
         var height = this.randomPosition();
         this.monster = new Monster(1.2 * screenWidth,height,window.monsterSpeed,this.bulletList,this.lockman,this);
@@ -147,10 +148,17 @@ var GameLayer = cc.LayerColor.extend({
         for(var i = 0;i < this.bulletList.length;i++){
             this.bulletList[i].unscheduleUpdate();
         }
+
+        // this.gameOverLabel = cc.LabelTTF.create( 'gameOver', 'Arial', 60 );
+        // this.gameOverLabel.setPosition( cc.p( 9*40 + 10, 9*40 - 10) );
+        // this.addChild( this.gameOverLabel );
+
         this.unschedule(this.createMonster);
         this.lockman.stop();
         this.redButton.stop();
         this.blueButton.stop();
+        if(this.item)
+            this.item.unscheduleUpdate();
         this.unscheduleUpdate();
         this.IsGameOver = true;
     },
@@ -175,6 +183,8 @@ var GameLayer = cc.LayerColor.extend({
 
         this.monsterList = [];
 
+        this.removeChild(this.item);
+ 
         this.item = null;
 
     },
@@ -207,7 +217,7 @@ var GameLayer = cc.LayerColor.extend({
     update: function(dt){
         if(Math.floor(window.number*2) % 2 == 0)
              window.timeLabel.setString(window.number);
-        if(this.bulletList.length == 3 && this.monsterList == 2 && this.score % 5 == 0){
+        if(this.bulletList.length == 3 && ( this.score % 5 == 0 || this.score % 4 == 1) ){
             this.createItem();
         }
     }
