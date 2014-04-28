@@ -2,7 +2,7 @@ var Item = cc.Sprite.extend({
 	ctor: function(x,y,speed,bulletList,lockman,gameLayer){
 		this._super();
 		this.initWithFile('res/images/Item.png');
-		this.speed = speed;
+		this.speed = speed * 2;
 		this.x = x;
 		this.y = y;
 		this.bulletList = bulletList;

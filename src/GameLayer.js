@@ -149,9 +149,9 @@ var GameLayer = cc.LayerColor.extend({
             this.bulletList[i].unscheduleUpdate();
         }
 
-        // this.gameOverLabel = cc.LabelTTF.create( 'gameOver', 'Arial', 60 );
-        // this.gameOverLabel.setPosition( cc.p( 9*40 + 10, 9*40 - 10) );
-        // this.addChild( this.gameOverLabel );
+        this.gameOverLabel = cc.LabelTTF.create( 'Game Over \n press any key to Continue', 'Arial', 60 );
+        this.gameOverLabel.setPosition( cc.p( screenWidth/2, screenHeight/2) );
+        this.addChild( this.gameOverLabel );
 
         this.unschedule(this.createMonster);
         this.lockman.stop();
@@ -198,6 +198,7 @@ var GameLayer = cc.LayerColor.extend({
 
         this.removeChild(this.blueButton);
 
+        this.gameOverLabel.setString('');
         window.number = 0;
         window.monsterSpeed = 3;
         this.score = 0;
