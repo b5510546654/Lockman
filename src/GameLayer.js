@@ -87,11 +87,12 @@ var GameLayer = cc.LayerColor.extend({
     removeBullet: function(bullet){
         var i = this.bulletList.indexOf(bullet);
         if (i >= 0) this.bulletList.splice(i,1);
+        this.removeChild(bullet);
     },
 
     createMonster: function(){
         var height = this.randomPosition();
-        this.monster = new Monster(1.2 * screenWidth,height,window.monsterSpeed,this.bulletList,this.lockman,this);
+        this.monster = new Monster(1.2 * screenWidth,height,window.monsterSpeed,this.bulletList,this.lockman);
         this.monster.setPosition(cc.p(1.2 * screenWidth,height));
         this.monsterList.push(this.monster);
         this.addChild(this.monster);
@@ -101,7 +102,7 @@ var GameLayer = cc.LayerColor.extend({
     createItem: function(){
         var height = this.randomPosition();
         if(this.item) return 0;
-        this.item = new Item(1.2 * screenWidth,height,window.monsterSpeed,this.bulletList,this.lockman,this);
+        this.item = new Item(1.2 * screenWidth,height,window.monsterSpeed,this.bulletList,this.lockman);
         this.item.setPosition(cc.p(1.2 * screenWidth,height));
         this.addChild(this.item);
         this.item.scheduleUpdate();
@@ -122,12 +123,13 @@ var GameLayer = cc.LayerColor.extend({
     removeMonster: function(monster){
         var i = this.monsterList.indexOf(monster);
         if(i >= 0) this.bulletList.splice(i,1);
+        this.removeChild(monster);
     },
 
     createBullet: function(atr){
         var posX = this.lockman.x + 50;
         var posY = this.lockman.y;
-        this.bullet = new Bullet(posX,posY,this,atr);
+        this.bullet = new Bullet(posX,posY,atr);
         this.bulletList.push(this.bullet);
         this.bullet.setPosition(cc.p(posX,posY));
         this.addChild(this.bullet);
