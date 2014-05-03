@@ -10,7 +10,6 @@ var RedButton = cc.Sprite.extend({
 		var animation = new cc.Animation.create();
 		animation.addSpriteFrameWithFile( 'res/images/red1.png' );
 		animation.addSpriteFrameWithFile( 'res/images/red2.png' );
-		console.log( animation.getDelayPerUnit() );
 		animation.setDelayPerUnit( 0.5 );
 		return cc.RepeatForever.create( cc.Animate.create( animation ) );
     },

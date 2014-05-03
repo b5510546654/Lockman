@@ -12,7 +12,7 @@ var Bullet = cc.Sprite.extend({
 	},
 
 	update: function(dt){
-		if(this.x > 900){
+		if(this.x > screenWidth){
 			this.getParent().removeBullet(this);
 		}else{
 			this.x = this.x + this.speed;

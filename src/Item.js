@@ -1,5 +1,5 @@
 var Item = cc.Sprite.extend({
-	ctor: function(x,y,speed,bulletList,lockman,gameLayer){
+	ctor: function(x,y,speed,bulletList,lockman){
 		this._super();
 		this.initWithFile('res/images/Item.png');
 		this.speed = speed * 2;
@@ -7,7 +7,6 @@ var Item = cc.Sprite.extend({
 		this.y = y;
 		this.bulletList = bulletList;
 		this.lockman = lockman;
-		this.gameLayer = gameLayer;
 	},
 
 	update: function(dt){
@@ -27,8 +26,7 @@ var Item = cc.Sprite.extend({
 	lockmanCollide: function(){
 		var lpos = this.lockman.getPosition();
 		if(this.isHit(lpos)){
-			this.gameLayer.deleteAll();
-			this.deleteItem();
+			this.getParent().deleteAll();
 		}
 	},
 
@@ -37,8 +35,8 @@ var Item = cc.Sprite.extend({
 			var bullet = this.bulletList[i];
 			var bpos = bullet.getPosition();
 			if(this.isHit(bpos)){
+ 				this.deleteBullet(bullet);
 				this.deleteItem();
-				this.deleteBullet(bullet);
 				break;
 			}
 		}
@@ -49,12 +47,11 @@ var Item = cc.Sprite.extend({
 	},
 
 	deleteItem: function(){
-		this.gameLayer.removeChild(this);
-		this.gameLayer.item = null;
+		this.getParent().item = null;
+		this.getParent().removeChild(this);
 	},
 
 	deleteBullet: function(bullet){
-		this.gameLayer.removeChild(bullet);
-		this.gameLayer.removeBullet(bullet);
+		this.getParent().removeBullet(bullet);
 	}
 });
