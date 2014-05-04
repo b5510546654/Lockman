@@ -26,10 +26,19 @@ var Item = cc.Sprite.extend({
 	lockmanCollide: function(){
 		var lpos = this.lockman.getPosition();
 		if(this.isHit(lpos)){
-			this.getParent().score += this.getParent().monsterList.length;
-			this.getParent().updateScore();
+			this.decreaseMonsterSpeed();
+			this.updateScore();
 			this.getParent().deleteAll();
 		}
+	},
+
+	decreaseMonsterSpeed: function(){
+		window.monsterSpeed -= 0.5;
+	},
+
+	updateScore: function(){
+		this.getParent().score += this.getParent().monsterList.length;
+		this.getParent().updateScore();		
 	},
 
 	bulletCollide: function(){
