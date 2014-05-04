@@ -10,7 +10,7 @@ var g_resources = [
 	{src: 'res/images/red2.png'},
 	{src: 'res/images/item.png'},
 	{src: 'res/images/monster3.png'},
-	{src: 'res/image/tutorial.png'}
+	{src: 'res/image/tutorial.png'},
 	//plist
 
 	//fnt
@@ -18,7 +18,6 @@ var g_resources = [
 	//tmx
 
 	//bgm
-
+	{src: 'res/sound/bombman.mp3'}
 	//effect
-
 ];
