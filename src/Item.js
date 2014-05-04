@@ -26,7 +26,8 @@ var Item = cc.Sprite.extend({
 	lockmanCollide: function(){
 		var lpos = this.lockman.getPosition();
 		if(this.isHit(lpos)){
-//			this.getParent().score += this.getParent()
+			this.getParent().score += this.getParent().monsterList.length;
+			this.getParent().updateScore();
 			this.getParent().deleteAll();
 		}
 	},

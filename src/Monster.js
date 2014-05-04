@@ -39,7 +39,7 @@ var Monster = cc.Sprite.extend({
 			if(this.isHit(bpos)){
 				if(bullet.atr == this.atr || this.atr == Monster.Atr.WHITE){
 					this.getParent().score ++;
-					this.getParent().updateScoreLabel();
+					this.getParent().updateScore();
 					this.deleteBullet(bullet);
 					this.deleteMonster(this);
 				}

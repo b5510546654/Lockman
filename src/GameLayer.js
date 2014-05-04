@@ -99,8 +99,8 @@ var GameLayer = cc.LayerColor.extend({
 
     createMonster: function(){
         var height = this.setMonsterPosition();
-        this.monster = new Monster(1.2 * screenWidth,height,window.monsterSpeed,this.bulletList,this.lockman);
-        this.monster.setPosition(cc.p(1.2 * screenWidth,height));
+        this.monster = new Monster(1.1 * screenWidth,height,window.monsterSpeed,this.bulletList,this.lockman);
+        this.monster.setPosition(cc.p(1.1 * screenWidth,height));
         this.monsterList.push(this.monster);
         this.addChild(this.monster);
         this.monster.scheduleUpdate();
@@ -109,8 +109,8 @@ var GameLayer = cc.LayerColor.extend({
     createItem: function(){
         var height = this.setMonsterPosition();
         if(this.item) return 0;
-        this.item = new Item(1.2 * screenWidth,height,window.monsterSpeed,this.bulletList,this.lockman);
-        this.item.setPosition(cc.p(1.2 * screenWidth,height));
+        this.item = new Item(1.1 * screenWidth,height,window.monsterSpeed,this.bulletList,this.lockman);
+        this.item.setPosition(cc.p(1.1 * screenWidth,height));
         this.addChild(this.item);
         this.item.scheduleUpdate();
     },
@@ -172,7 +172,7 @@ var GameLayer = cc.LayerColor.extend({
         this.IsGameOver = true;
     },
 
-    updateScoreLabel: function(){        
+    updateScore: function(){        
         this.scoreLabel.setString("Score : " + this.score);
         if(this.maxScore < this.score){
             this.maxScore = this.score;
@@ -220,7 +220,7 @@ var GameLayer = cc.LayerColor.extend({
 
     newGame: function(){
         this.clear();
-        this.updateScoreLabel();
+        this.updateScore();
         this.createButton();
         this.createLockman();
         this.schedule(this.createMonster,1);
