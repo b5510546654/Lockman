@@ -5,9 +5,10 @@ var Monster = cc.Sprite.extend({
 		this.atr = this.randomAtr();
 		if(this.atr == Monster.Atr.RED)
 			this.initWithFile('res/images/monster.png');
-		else
+		else if(this.atr == Monster.Atr.BLUE)
 			this.initWithFile('res/images/monster2.png');
-
+		else
+			this.initWithFile('res/images/monster3.png')
 		this.speed = speed;
 		this.x = x;
 		this.y = y;
@@ -36,7 +37,7 @@ var Monster = cc.Sprite.extend({
 			var bullet = this.bulletList[i];
 			var bpos = bullet.getPosition();
 			if(this.isHit(bpos)){
-				if(bullet.atr == this.atr){
+				if(bullet.atr == this.atr || this.atr == Monster.Atr.WHITE){
 					this.getParent().score ++;
 					this.getParent().updateScoreLabel();
 					this.deleteBullet(bullet);
@@ -72,11 +73,12 @@ var Monster = cc.Sprite.extend({
 	},
 	
 	randomAtr : function(){
-		var random = Math.ceil(Math.random() * 2);
+		var random = Math.ceil(Math.random() * 3);
 		return random;
 	}
 });
 Monster.Atr = {
 	RED : 1,
-	BLUE : 2
+	BLUE : 2,
+	WHITE : 3
 }

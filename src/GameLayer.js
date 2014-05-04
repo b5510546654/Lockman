@@ -8,6 +8,10 @@ var GameLayer = cc.LayerColor.extend({
         this.background.setAnchorPoint(new cc.Point(0,0));
         this.addChild(this.background,0);
 
+        this.tutorial = cc.Sprite.create ('res/images/tutorial.png');
+        this.tutorial.setPosition(new cc.Point(0.9*screenWidth + 70,0.2*screenHeight + 15));
+        this.addChild(this.tutorial,1);
+
         this.setKeyboardEnabled(true);
         this._super(new cc.Color4B(127,127,127,255));
         this.setPosition(new cc.Point(0,0));
