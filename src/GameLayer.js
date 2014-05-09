@@ -8,6 +8,8 @@ var GameLayer = cc.LayerColor.extend({
         this.background.setAnchorPoint(new cc.Point(0,0));
         this.addChild(this.background,0);
 
+        this.createTracks();
+
         this.tutorial = cc.Sprite.create ('res/images/tutorial.png');
         this.tutorial.setPosition(new cc.Point(0.9*screenWidth + 70,0.2*screenHeight + 15));
         this.addChild(this.tutorial,1);
@@ -28,12 +30,14 @@ var GameLayer = cc.LayerColor.extend({
 
         this.maxScore = 0;
         this.maxScoreLabel = cc.LabelTTF.create( "High Score : 0", 'Arial', 32 );
+        this.maxScoreLabel.setColor( new cc.Color3B( 255, 0, 0 ) );
         this.maxScoreLabel.setPosition( cc.p(15* 40, 14 * 40 + 15) );
         this.addChild( this.maxScoreLabel);
 
         this.score = 0;
         this.scoreLabel = cc.LabelTTF.create( "Score : 0", 'Arial', 32 );
         this.scoreLabel.setPosition( cc.p( 15 * 40, 14 * 40 - 15 ) );
+        this.scoreLabel.setColor( new cc.Color3B( 255, 0, 0 ) );
         this.addChild( this.scoreLabel );
 
         window.number = 0;
@@ -46,6 +50,21 @@ var GameLayer = cc.LayerColor.extend({
         return true;
     },
 
+    createTracks: function(){
+        this.track = cc.Sprite.create ('res/images/track.png');
+        this.track.setPosition(new cc.Point(screenWidth/2,screenHeight/3));
+        this.addChild(this.track);
+
+        this.track = cc.Sprite.create ('res/images/track.png');
+        this.track.setPosition(new cc.Point(screenWidth/2,screenHeight/3 + screenHeight / 4));
+        this.addChild(this.track);
+
+        this.track = cc.Sprite.create ('res/images/track.png');
+        this.track.setPosition(new cc.Point(screenWidth/2,screenHeight/3 + 2 * screenHeight / 4));
+        this.addChild(this.track);
+
+    },
+    
     createButton: function(){
         this.redButton = new RedButton(screenWidth / 4,screenHeight / 6);
         this.redButton.setPosition(cc.p(screenWidth / 4,screenHeight / 6));
